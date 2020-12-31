@@ -1,0 +1,639 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap);
+
+$roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
+
+#open-pkg-main-wrapper {
+
+  font-family: $roboto;
+  .open-pkg-header {
+    background-color: #F6F6F6;
+    @media screen and (min-width: 768px){
+      padding: 10px 88px;
+    }
+    @media screen and (max-width: 767px){
+      padding: 10px 0;
+    }
+    .opkg-logo {
+      width: 138px;
+    }
+    .sign-in-out-btn {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 14px;
+      color: #131415;
+      border: none;
+      box-shadow: none;
+      @media screen and (max-width: 767px){
+        position: absolute;
+        bottom: 60px;
+        right: 10px;
+      }
+    }
+  }
+  .identity-column{
+    @media screen and (min-width: 768px){
+      text-align: right;
+    }
+    @media screen and (max-width: 767px){
+      text-align: left;
+      margin-top: 10px;
+    }
+  }
+  .identity-wrapper {
+    display: inline;
+    background: #EDEDED;
+    border-radius: 100px;
+    padding: 10px 20px 10px 4px;
+    line-height: 42px;
+    @media screen and (min-width: 1023px){
+      margin-right: 0;
+    }
+    .identicon-img {
+      width: 32px;
+      position: relative;
+      bottom: 2px;
+    }
+
+    .identity-text {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 14px;
+      color: #131415;
+      display: inline-block;
+      white-space: nowrap;
+      max-width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0;
+      margin-left: 5px;
+    }
+  }
+  .application-content-wrapper {
+    padding-bottom: 200px;
+    .opkg-tabs{
+      @media screen and (min-width: 1024px){
+        display: flex;
+      }
+      @media screen and (max-width: 1023px){
+        display: block;
+      }
+      .tabs-column{
+        @media screen and (max-width: 1023px){
+          text-align: center;
+        }
+      }
+      #opkg-navigation-tabs{
+        list-style: none;
+        @media screen and (min-width: 1024px){
+          padding-top: 90px;
+        }
+        @media screen and (max-width: 1023px){
+          padding: 40px 0;
+        }
+        li{
+          @media screen and (min-width: 1024px){
+            margin-bottom: 16px;
+          }
+          @media screen and (max-width: 1023px){
+            display: inline;
+            margin: 0 30px;
+          }
+        }
+        li a,
+        li.active a{
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 14px;
+        }
+        li a{
+          color: #131415;
+        }
+        li.active a{
+          color: #136BC8;
+        }
+      }
+    }
+    .open-pkg-menu {
+      padding-top: 80px;
+      .opkg-menu-item {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        color: #89898A;
+        display: block;
+        box-shadow: none;
+        transition: .2s all;
+
+        &:active,
+        &:focus {
+          transition: .2s all;
+          color: #136BC8;
+        }
+      }
+    }
+
+    .open-pkg-application-content {
+      .personal-data-wrapper,
+      .activity-wrapper {
+        @media screen and (min-width: 768px){
+          padding: 70px 0;
+        }
+        @media screen and (max-width: 767px){
+          padding: 0;
+        }
+
+        .application-main-headline {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 46px;
+          line-height: 54px;
+          align-items: center;
+          color: #131415;
+          margin-bottom: 24px;
+        }
+
+        .application-medium-headline {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 28px;
+          line-height: 36px;
+          color: #131415;
+          margin-bottom: 32px;
+        }
+
+        .large-text {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 20px;
+          line-height: 32px;
+          color: #131415;
+        }
+
+        .regular-text {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 20px;
+          color: #000000;
+          margin-bottom: 28px;
+        }
+
+        .large-spacing {
+          margin-bottom: 66px;
+        }
+        .medium-spacing{
+          margin-bottom: 32px;
+        }
+
+        // ***************** BUTTONS SCSS START ******************
+        .get-personal-data-btn,
+        .inactive-get-data-button {
+          padding: 13px 20px;
+          outline: none;
+          transition: .2s all;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 14px;
+        }
+
+        .get-personal-data-btn {
+          background: #136BC8;
+          color: #FFFFFF;
+          &:focus, &:active {
+            outline: none;
+          }
+        }
+
+        // inactive get personal data
+        .inactive-get-data-button {
+          background: #EDEDED;
+          color: #C4C4C4;
+          pointer-events: none;
+        }
+
+        .delete-personal-data-btn,
+        .inactive-delete-personal-data-btn {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 14px;
+          box-shadow: none;
+        }
+
+        .delete-personal-data-btn {
+          color: #DE5757;
+        }
+
+        // inactive delete button
+        .inactive-delete-personal-data-btn {
+          color: #C4C4C4;
+          pointer-events: none;
+        }
+
+        .validate-data-btn,
+        .inactive-validate-data-btn {
+          padding: 13px 20px 13px 43px;
+          outline: none;
+          transition: .2s all;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 14px;
+          background-repeat: no-repeat;
+          background-position: left 13px center;
+          background-size: 20px;
+        }
+
+        .validate-data-btn {
+          color: #ffffff;
+          background-color: #1D2667;
+          background-image: url("~@/assets/origintrail-white.svg");
+          &:focus, &:active {
+            outline: none;
+          }
+        }
+
+        .inactive-validate-data-btn {
+          background-color: #EDEDED;
+          box-shadow: none;
+          color: #C4C4C4;
+          pointer-events: none;
+          background-image: url("~@/assets/origintrail-grey.svg");
+        }
+
+        // ***************** BUTTONS SCSS STOP *****************
+
+        .separator {
+          height: 1px;
+          background-color: #DFDFDF;
+          width: 100%;
+          display: block;
+          margin: 18px 0;
+        }
+        .table-row{
+          margin-top: 57px;
+          .table-column:last-of-type {
+            border-bottom: none;
+          }
+          .table-column{
+            padding: 31px 20px;
+            border-bottom: 1px solid #DFDFDF;
+            .item-icon-wrapper{
+              display: inline;
+              margin-right: 27px;
+              .item-icon{
+
+              }
+            }
+            .item-status-wrapper{
+              min-width: 150px;
+              display: inline-block;
+              .item-status{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 14px;
+                color: #131415;
+              }
+            }
+            .item-date-wrapper{
+              display: inline;
+              .item-date{
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 100%;
+                color: #131415;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #website-widget{
+    width: 276px;
+    height: 104px;
+    border-radius: 4px;
+    position: fixed; // temporary setting za demo
+    /*display: none; // temporary setting za demo*/
+    z-index: 100;
+    right: 25px;
+    bottom: 50px;
+    background-image: url("~@/assets/widget-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: .3s all;
+    .widget-button{
+      padding: 7px 12px;
+      background: #136BC8;
+      color: #ffffff;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 10px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      position: absolute;
+      right: 20px;
+      top: 35%;
+      &:focus,
+      &:active{
+        outline: none;
+      }
+    }
+  }
+
+  .sign-in-boxes-container-active{
+    display: block !important;
+    transition: .3s ease !important;
+  }
+  .sign-in-boxes-container-closed{
+    display: none;
+    transition: .3s ease;
+  }
+
+  .download-container-disabled,
+  .delete-container-disabled,
+  .validation-container-disabled{
+    display: none;
+  }
+
+  .download-container-active,
+  .delete-container-active,
+  .validation-container-active{
+    display: block;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.5);
+    .download-pop-up,
+    .delete-pop-up{
+      display: block;
+      background-color: #ffffff;
+      border: none;
+      height: 100%;
+      border-radius: 4px;
+      top: 200px;
+      position: relative;
+      margin: 0 auto;
+      @media screen and (min-width: 768px){
+        max-width: 627px;
+        padding: 133px 48px;
+        max-height: 408px;
+      }
+      @media screen and (max-width: 767px){
+        height: auto;
+        padding: 50px 15px;
+        max-width: 627px;
+        width: 95%;
+      }
+      .pop-up-close-button{
+        position: absolute;
+        top: 21px;
+        right: 21px;
+      }
+      .pop-up-header{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        line-height: 44px;
+        color: #131415;
+        margin-bottom: 24px;
+      }
+      .pop-up-text-regular{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 150%;
+        color: #131415;
+        margin-bottom: 52px;
+      }
+      .popup-btns-wrapper{
+        margin-top: 90px;
+      }
+      .download-bar{
+        width: 100%;
+        background-color: #DFDFDF;
+        border-radius: 100px;
+        height: 6px;
+        .download-progress{
+          background-color: #136BC8;
+          border-radius: 100px;
+          transition: .3s ease;
+          height: 6px;
+          width: 0;
+        }
+      }
+      .delete-data-button,
+      .cancel-delete-data{
+        border-radius: 4px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        padding: 13px 20px;
+        border: none;
+      }
+      .delete-data-button{
+        background-color: #136BC8;
+        color: #ffffff;
+      }
+      .cancel-delete-data{
+        background: #EDEDED;
+        color: #131415;
+        margin-right: 10px;
+      }
+    }
+
+    /* VALIDATION POP UP CSS */
+    .validation-pop-up{
+      display: block;
+      background-color: #ffffff;
+      border: none;
+      width: auto;
+      height: auto;
+      border-radius: 4px;
+      top: 7%;
+      position: relative;
+      margin: 0 auto;
+      @media screen and (min-width: 768px){
+        max-width: 450px;
+        padding: 70px 48px;
+      }
+      @media screen and (max-width: 767px){
+        height: auto;
+        padding: 50px 15px;
+        max-width: 627px;
+        width: 95%;
+      }
+      .verify-data-button{
+        color: white;
+        background-color: #1D2667;
+        border-radius: 4px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        padding: 13px 20px;
+        border: none;
+        margin-left: 15%;
+        .verify-arrow-img{
+          margin-right: 10px;
+          width: 16px;
+          margin-bottom: 2px;
+        }
+      }
+      .pop-up-close-button{
+        position: absolute;
+        top: 21px;
+        right: 21px;
+      }
+      .temp-validation-image{
+
+      }
+    }
+  }
+
+  #sign-in-boxes-container{
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255, 0.8);
+    transition: .4s ease;
+    .terms-and-conditions-box-show{
+      right: 25px !important;
+      transition: .3s ease;
+    }
+    .metamask-sign-in-box-show{
+      right: 25px !important;
+      transition: .3s ease;
+    }
+    .successfull-sign-in-box-show{
+      right: 25px !important;
+      transition: .3s ease;
+    }
+    .terms-and-conditions-box,
+    .metamask-sign-in-box,
+    .successfull-sign-in-box{
+      position: fixed;
+      min-height: 322px;
+      bottom: 50px;
+      right: -20000px;
+      box-shadow: 0px 4px 8px rgba(82, 97, 115, 0.18);
+      border-radius: 4px;
+      padding: 16px;
+      max-width: 339px;
+      background-color: #ffffff;
+      transition: .3s ease;
+      .pop-up-close-button{
+        position: absolute;
+        right: 16px;
+        cursor: pointer;
+      }
+      .pop-up-image{
+        width: 200px;
+      }
+      .pop-up-headline{
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #131415;
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+      .form-check{
+        .form-check-input{
+          width: 18px;
+          height: 18px;
+          border-radius: 1px;
+        }
+        .form-check-label,
+        .checkbox-bold-text{
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          color: #000000;
+          margin-left: 5px;
+          line-height: 2.3;
+        }
+        .checkbox-bold-text{
+          font-weight: bold;
+          margin-left: 0;
+        }
+      }
+      .pop-up-text{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 20px;
+        color: #131415;
+        margin-bottom: 19px;
+      }
+      .pop-up-text-small{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 100%;
+        color: #000000;
+        margin-top: 19px;
+      }
+      .what-is-opkg-link{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 12px;
+        color: #131415;
+      }
+      .button-inactive{
+        border-radius: 4px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 12px;
+        border: none;
+        padding: 10px 15px;
+        color: #C4C4C4 !important;
+        transition: .3s ease;
+        background: #EDEDED !important;
+        pointer-events: none !important;
+      }
+      .pop-up-buttons-wrapper{
+        position: absolute;
+        bottom: 5%;
+        .pop-up-button-accept,
+        .pop-up-button-decline{
+          border-radius: 4px;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 12px;
+          border: none;
+          padding: 10px 15px;
+          transition: .3s ease;
+        }
+        .pop-up-button-accept{
+          background: #136BC8;
+          color: #ffffff;
+          margin-right: 8px;
+          transition: .3s ease;
+        }
+        .pop-up-button-decline{
+          background: #EDEDED;
+          color: #131415;
+          margin-right: 23px;
+          transition: .3s ease;
+        }
+      }
+    }
+  }
+}
