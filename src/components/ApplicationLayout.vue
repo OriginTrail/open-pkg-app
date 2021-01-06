@@ -112,7 +112,7 @@
                                              src="~@/assets/identicon.png"
                                              alt="">
                                         <p class="identity-text">
-                                            did:ethr:{{ wallet }}</p>
+                                            did:ethr:{{ wallet}}</p>
                                     </div>
 
                                     <!--                                    ACTIVITY TABLE-->
