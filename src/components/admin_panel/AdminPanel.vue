@@ -2,176 +2,200 @@
     <div id="open-pkg-main-wrapper" v-if="wallet !== null">
         <div class="container-fluid">
             <div class="row open-pkg-header">
-                <div class="col-md-3">
-                    <img class="opkg-logo" src="~@/assets/OpenPKG-logo.png" alt="OpenPKG">
-                </div>
-                <div class="col-md-9 identity-column">
-                    <div class="identity-wrapper" v-if="wallet !== null">
-                        <img class="identicon-img" src="~@/assets/identicon.png" alt="">
-                        <p class="identity-text">
-                            did:ethr:{{ wallet }}</p>
+                <div class="col-md-12">
+                    <div class="header-container">
+                        <img class="opkg-logo" src="~@/assets/OpenPKG-logo.png" alt="OpenPKG">
                     </div>
-                    <button type="button" class="btn sign-in-out-btn" v-if="wallet !== null">Sign out</button>
-                    <button type="button" class="btn sign-in-out-btn" v-if="wallet === null" @click="signInWithMetamask">Sign in</button>
                 </div>
             </div>
+
         </div>
         <div class="container">
-            <div class="row application-content-wrapper">
-
-                <!--                 Side menu - LEFT-->
+            <div class=" application-content-wrapper">
                 <div class="tabs opkg-tabs">
-                    <div class="col-lg-3 col-md-12 col-sm-12 tabs-column">
-                        <ul id="opkg-navigation-tabs">
-                            <li><a class="opkg-menu-item" href="#tab1">Personal data options</a></li>
-                            <li><a class="opkg-menu-item" href="#tab2">Activity</a></li>
-                        </ul> <!-- END opkg-navigation-tabs -->
-                    </div>
-
-                    <div class="col-lg-9 col-md-12 col-sm-12 open-pkg-application-content">
-                        <!--                        Content - RIGHT-->
-                        <div id="tabs-content">
-                            <div id="tab1" class="tab-content">
-                                <div class="personal-data-wrapper display-personal-data" id="personal-data">
-                                    <h1 class="application-main-headline">OpenPKG</h1>
-                                    <p class="large-text large-spacing">
-                                        Nunc ultricies habitant luctus condimentum eu, risus. Vulputate nam phasellus mi
-                                        curabitur
-                                        phasellus tincidunt adipiscing eget dolor.
-                                    </p>
-                                    <h2 class="application-medium-headline">
-                                        Get personal data
-                                    </h2>
-                                    <p class="regular-text">
-                                        You can request all personal data collected by the OpenPKG-enabled website based
-                                        on your
-                                        DID.
-                                        You can trigger the request in the OpenPKG section of the organization’s
-                                        website, and can
-                                        download the file when it is ready. Requesting data is only possible if you are
-                                        signed into
-                                        OpenPKGR.
-                                    </p>
-                                    <button @click="showDownloadContainer()" type="button"
-                                            class="btn get-personal-data-btn">GET MY
-                                        PERSONAL DATA
-                                    </button>
-                                    <div class="separator"></div>
-                                    <h2 class="application-medium-headline">
-                                        Delete personal data
-                                    </h2>
-                                    <p class="regular-text">
-                                        Only you can request the deletion of all personal data collected by the OpenPKG
-                                        based on
-                                        your
-                                        DID. You can trigger the request in the OpenPKG section of the organization’s
-                                        website. When
-                                        the
-                                        data is successfully deleted, you will get confirmation. OpenPKG should only
-                                        delete data
-                                        related
-                                        to the DID currently signed in through MetaMask.
-                                    </p>
-                                    <button type="button" @click="showDeleteContainer()"
-                                            class="btn delete-personal-data-btn">
-                                        DELETE PERSONAL DATA
-                                    </button>
-                                    <div class="separator"></div>
-                                    <h2 class="application-medium-headline">
-                                        Delete personal data
-                                    </h2>
-                                    <p class="regular-text">
-                                        Only you can request the deletion of all personal data collected by the OpenPKG
-                                        based on
-                                        your
-                                        DID. You can trigger the request in the OpenPKG section of the organization’s
-                                        website. When
-                                        the
-                                        data is successfully deleted, you will get confirmation. OpenPKG should only
-                                        delete data
-                                        related
-                                        to the DID currently signed in through MetaMask.
-                                    </p>
-                                    <button @click="showValidationPopUp()" type="button" class="btn validate-data-btn">
-                                        VALIDATE
-                                        DATA INTEGRITY
-                                    </button>
-                                </div>
+                    <div class="open-pkg-application-content row">
+                        <div class="col-lg-7">
+                            <div class="identity-wrapper visible-tablet">
+                                <img class="identicon-img"
+                                     src="~@/assets/identicon.png"
+                                     alt="">
+                                <p class="identity-text">
+                                    did:ethr:{{ wallet }}</p>
                             </div>
-                            <div id="tab2" class="tab-content">
-                                <!--                                ACTIVITY COMPONENT-->
-                                <div class="activity-wrapper" id="activity-data">
-                                    <h1 class="application-main-headline">Activity</h1>
-                                    <p class="large-text medium-spacing">
-                                        Nunc ultricies habitant luctus condimentum eu, risus. Vulputate nam phasellus mi
-                                        curabitur
-                                        phasellus tincidunt adipiscing eget dolor.
-                                    </p>
-                                    <div class="identity-wrapper">
-                                        <img class="identicon-img"
-                                             src="~@/assets/identicon.png"
-                                             alt="">
-                                        <p class="identity-text">
-                                            did:ethr:{{ wallet }}</p>
+                            <div class="personal-data-wrapper display-personal-data" id="personal-data">
+                                <h1 class="application-main-headline">OpenPKG</h1>
+                                <p class="large-text large-spacing">
+                                    Own your data. Use OpenPKG to discover what personal data organisations hold about
+                                    you, validate it or request its automated deletion.
+                                </p>
+                                <h2 class="application-medium-headline">
+                                    Get personal data
+                                </h2>
+                                <p class="regular-text">
+                                    You can request all personal data collected by the OpenPKG-enabled website based on
+                                    your DID. You can trigger the request in the OpenPKG section of the organization’s
+                                    website, and can download the file when it is ready. Requesting data is only
+                                    possible if you are signed into OpenPKG.
+                                </p>
+                                <button @click="showDownloadContainer()" type="button"
+                                        class="btn get-personal-data-btn">GET MY
+                                    PERSONAL DATA
+                                </button>
+                                <div class="separator"></div>
+                                <h2 class="application-medium-headline">
+                                    Delete personal data
+                                </h2>
+                                <p class="regular-text">
+                                    You can request deletion of all personal data collected by the OpenPKG-enabled
+                                    website based on your DID. You can trigger the request below and receive
+                                    confirmation in the Activity log once deletion is finalised.
+                                </p>
+                                <button type="button" @click="showDeleteContainer()"
+                                        class="btn get-personal-data-btn">
+                                    DELETE PERSONAL DATA
+                                </button>
+                                <div class="separator"></div>
+                                <h2 class="application-medium-headline">
+                                    Validate data integrity
+                                </h2>
+                                <p class="regular-text">
+                                    You can validate the integrity of personal data stored in OpenPKG. You can do this
+                                    in the OpenPKG section of the organization’s website.
+                                </p>
+                                <button @click="showValidationPopUp()" type="button" class="btn validate-data-btn">
+                                    VALIDATE DATA INTEGRITY
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <!--ACTIVITY COMPONENT-->
+                            <div class="activity-wrapper" id="activity-data">
+                                <div class="identity-wrapper visible-desktop">
+                                    <img class="identicon-img"
+                                         src="~@/assets/identicon.png"
+                                         alt="">
+                                    <p class="identity-text">
+                                        did:ethr:{{ wallet }}</p>
+                                </div>
+
+                                <h1 class="activity-headline">Activity log</h1>
+                                <p class="regular-text medium-spacing">
+                                    Nunc ultricies habitant luctus condimentum eu, risus. Vulputate nam phasellus mi
+                                    curabitur
+                                    phasellus tincidunt adipiscing eget dolor.
+                                </p>
+
+                                <!-- ACTIVITY TABLE-->
+                                <div class="row table-row" id="activity">
+
+                                    <!--  ACTIVITY SINGLE ROW-->
+                                    <div class="col-md-12 table-column">
+                                        <div class="item-icon-wrapper">
+                                            <img class="item-icon"
+                                                 src="~@/assets/download.svg"
+                                                 alt="Download">
+                                            <!-- <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
+                                        </div>
+                                        <div class="item-status-wrapper">
+                                            <span class="item-status">Downloaded</span>
+                                            <!-- <span>Deleted</span>-->
+                                        </div>
+                                        <div class="item-date-wrapper">
+                                            <span class="item-date">20.11.2020</span>
+                                        </div>
                                     </div>
 
-                                    <!--                                    ACTIVITY TABLE-->
-                                    <div class="row table-row" id="activity">
-
-                                        <!--                                        ACTIVITY SINGLE ROW-->
-                                        <div class="col-md-12 table-column">
-                                            <div class="item-icon-wrapper">
-                                                <img class="item-icon"
-                                                     src="~@/assets/download.svg"
-                                                     alt="Download">
-                                                <!--                                                <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
-                                            </div>
-                                            <div class="item-status-wrapper">
-                                                <span class="item-status">Downloaded</span>
-                                                <!--                                                <span>Deleted</span>-->
-                                            </div>
-                                            <div class="item-date-wrapper">
-                                                <span class="item-date">20.11.2020</span>
-                                            </div>
+                                    <!-- ACTIVITY SINGLE ROW-->
+                                    <div class="col-md-12 table-column">
+                                        <div class="item-icon-wrapper">
+                                            <!-- <img class="item-icon" src="~@/assets/download.svg" alt="Download">-->
+                                            <img class="item-icon"
+                                                 src="~@/assets/trash.svg"
+                                                 alt="Deleted">
                                         </div>
-
-                                        <!--                                       ACTIVITY SINGLE ROW-->
-                                        <div class="col-md-12 table-column">
-                                            <div class="item-icon-wrapper">
-                                                <!--                                                <img class="item-icon" src="~@/assets/download.svg" alt="Download">-->
-                                                <img class="item-icon"
-                                                     src="~@/assets/trash.svg"
-                                                     alt="Deleted">
-                                            </div>
-                                            <div class="item-status-wrapper">
-                                                <!--                                                <span class="item-status">Downloaded</span>-->
-                                                <span class="item-status">Deleted</span>
-                                            </div>
-                                            <div class="item-date-wrapper">
-                                                <span class="item-date">20.11.2020</span>
-                                            </div>
+                                        <div class="item-status-wrapper">
+                                            <!-- <span class="item-status">Downloaded</span>-->
+                                            <span class="item-status">Deleted</span>
                                         </div>
-
-                                        <!--                                        ACTIVITY SINGLE ROW-->
-                                        <div class="col-md-12 table-column">
-                                            <div class="item-icon-wrapper">
-                                                <img class="item-icon"
-                                                     src="~@/assets/download.svg"
-                                                     alt="Download">
-                                                <!--                                                <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
-                                            </div>
-                                            <div class="item-status-wrapper">
-                                                <span class="item-status">Downloaded</span>
-                                                <!--                                                <span class="item-status">Deleted</span>-->
-                                            </div>
-                                            <div class="item-date-wrapper">
-                                                <span class="item-date">20.11.2020</span>
-                                            </div>
+                                        <div class="item-date-wrapper">
+                                            <span class="item-date">20.11.2020</span>
                                         </div>
                                     </div>
+
+                                    <!--ACTIVITY SINGLE ROW-->
+                                    <div class="col-md-12 table-column">
+                                        <div class="item-icon-wrapper">
+                                            <img class="item-icon"
+                                                 src="~@/assets/download.svg"
+                                                 alt="Download">
+                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
+                                        </div>
+                                        <div class="item-status-wrapper">
+                                            <span class="item-status">Downloaded</span>
+                                            <!--<span class="item-status">Deleted</span>-->
+                                        </div>
+                                        <div class="item-date-wrapper">
+                                            <span class="item-date">20.11.2020</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 table-column">
+                                        <div class="item-icon-wrapper">
+                                            <img class="item-icon"
+                                                 src="~@/assets/download.svg"
+                                                 alt="Download">
+                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
+                                        </div>
+                                        <div class="item-status-wrapper">
+                                            <span class="item-status">Downloaded</span>
+                                            <!--<span class="item-status">Deleted</span>-->
+                                        </div>
+                                        <div class="item-date-wrapper">
+                                            <span class="item-date">20.11.2020</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 table-column">
+                                        <div class="item-icon-wrapper">
+                                            <img class="item-icon"
+                                                 src="~@/assets/download.svg"
+                                                 alt="Download">
+                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
+                                        </div>
+                                        <div class="item-status-wrapper">
+                                            <span class="item-status">Downloaded</span>
+                                            <!--<span class="item-status">Deleted</span>-->
+                                        </div>
+                                        <div class="item-date-wrapper">
+                                            <span class="item-date">20.11.2020</span>
+                                        </div>
+                                    </div>
+
+                                    <!--PAGINATION-->
+                                    <nav aria-label="Page navigation example" class="activity-pagination">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
-                        </div> <!-- END tabs-content -->
+                        </div>
                     </div> <!-- END Right side column 9 -->
                 </div><!-- END tabs -->
             </div> <!-- END Application content wrapper -->
@@ -216,7 +240,7 @@
         </div>
 
 
-        <!--        Inner Validation pop-up container-->
+        <!--Inner Validation pop-up container-->
         <div id="validate-data-pop-up-container" class="validation-container-disabled">
             <div id="validation-data-pop-up" class="validation-pop-up">
                 <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
@@ -227,7 +251,7 @@
                 <img class="temp-validation-image img-fluid"
                      src="~@/assets/validation-component-temp-image.png"
                      alt="">
-                <!--                Remove image from directory when Validation is added-->
+                <!-- Remove image from directory when Validation is added-->
                 <button id="verify-again-button" class="verify-data-button"><img class="verify-arrow-img"
                                                                                  src="~@/assets/verify-again-arrow.png"
                                                                                  alt="">VERIFY AGAIN
@@ -245,7 +269,7 @@
         name: "AdminPanel",
         data() {
             return {
-                wallet: null
+                wallet: '0x7778830314',
             }
         },
         mounted() {
@@ -315,7 +339,7 @@
             listenEthereumEvents() {
                 window.ethereum.on('accountsChanged', (accounts) => {
 
-                    if(accounts.length === 0) {
+                    if (accounts.length === 0) {
                         this.wallet = null;
 
                     } else {

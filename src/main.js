@@ -13,6 +13,7 @@ window.$ = window.jQuery = require('jquery');
 Vue.config.productionTip = false;
 
 
+
 new Vue({
   store,
   render: h => h(App)

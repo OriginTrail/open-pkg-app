@@ -6,8 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build:sdk": "vue-cli-service build --target lib --dest sdk --name OpenPKG src/components/sdk/OpenPKG.js",
-    "build:sign-in-popup" : "vue-cli-service build --target wc --dest sign_in_popup  --name open-pkg-sign --inline-vue src/components/sign_in_popup/SignInPopup.vue",
-    "build:admin-panel" : "vue-cli-service build --target wc --dest admin_panel  --name admin-panel --inline-vue src/components/admin_panel/AdminPanel.vue"
+    "build:sign-in-popup": "vue-cli-service build --target wc --dest sign_in_popup  --name open-pkg-sign --inline-vue src/components/sign_in_popup/SignInPopup.vue",
+    "build:admin-panel": "vue-cli-service build --target wc --dest admin_panel  --name admin-panel --inline-vue src/components/admin_panel/AdminPanel.vue",
+    "serve:admin-panel" : "vue-cli-service serve --target wc --dest admin_panel  --name admin-panel --inline-vue src/components/admin_panel/AdminPanel.vue"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
