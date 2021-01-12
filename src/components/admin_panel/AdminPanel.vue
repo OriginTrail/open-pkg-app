@@ -110,9 +110,9 @@
                                     </div>
 
                                     <!--PAGINATION-->
-                                    <nav aria-label="Page navigation example" class="activity-pagination">
+                                    <nav aria-label="Page navigation example" class="activity-pagination" v-if="selectedActivities.length > 0">
                                         <ul class="pagination">
-                                            <li class="page-item" v-if="selectedActivities.length > 0">
+                                            <li class="page-item">
                                                 <a @click="selectPage(1)" class="page-link" href="javascript:void(0)"
                                                    aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
@@ -124,7 +124,7 @@
                                                    :class="(selectedPage === index ? 'active-page' : '')"
                                                    href="javascript:void(0)" @click="selectPage(index)">{{ index }}</a>
                                             </li>
-                                            <li class="page-item" v-if="selectedActivities.length > 0">
+                                            <li class="page-item">
                                                 <a @click="selectPage(numberOfPages)" class="page-link"
                                                    href="javascript:void(0)" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
@@ -453,6 +453,8 @@
                 this.activities = [];
 
                 this.selectedActivities = [];
+
+                this.numberOfPages = 0;
 
                 return deleteDataResult;
             },
