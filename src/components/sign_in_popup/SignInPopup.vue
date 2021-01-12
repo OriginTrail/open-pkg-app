@@ -101,7 +101,7 @@
 
                 if (window.ethereum && window.ethereum.isMetaMask) {
 
-                    if (window.ethereum._state.accounts.length > 0) {
+                    if (window.ethereum._state.hasOwnProperty('accounts') && window.ethereum._state.accounts.length > 0) {
 
                         console.log('already connected');
 
