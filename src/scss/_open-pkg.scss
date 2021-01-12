@@ -5,16 +5,22 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
 #open-pkg-main-wrapper {
 
   font-family: $roboto;
+
+  button:focus {outline:0;}
+
   .open-pkg-header {
     background-color: #F6F6F6;
     @media screen and (min-width: 768px){
-      padding: 10px 88px;
+      padding: 10px 0;
     }
     @media screen and (max-width: 767px){
       padding: 10px 0;
     }
-    .opkg-logo {
-      width: 138px;
+    .header-container{
+      padding: 0;
+      .opkg-logo {
+        width: 138px;
+      }
     }
     .sign-in-out-btn {
       font-weight: 500;
@@ -39,17 +45,43 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
       margin-top: 10px;
     }
   }
+  .visible-desktop{
+    @media screen and (min-width: 992px){
+      display: block;
+    }
+    @media screen and (max-width: 991px){
+      display: none;
+    }
+  }
+  .visible-tablet{
+    @media screen and (min-width: 992px){
+      display: none;
+    }
+    @media screen and (max-width: 991px){
+      display: block;
+    }
+  }
   .identity-wrapper {
-    display: inline;
-    background: #EDEDED;
-    border-radius: 100px;
-    padding: 10px 20px 10px 4px;
-    line-height: 42px;
-    @media screen and (min-width: 1023px){
-      margin-right: 0;
+
+    @media screen and (min-width: 992px){
+      width: 100%;
+      height: 60px;
+      background: #ffffff;
+      padding: 7px;
+      border-radius: 100px;
+      margin-bottom: 56px;
+    }
+    @media screen and (max-width: 991px){
+      width: 100%;
+      max-width: 320px;
+      height: 60px;
+      background: #f6f6f6;
+      padding: 7px;
+      border-radius: 100px;
+      margin-bottom: 56px;
     }
     .identicon-img {
-      width: 32px;
+      width: 48px;
       position: relative;
       bottom: 2px;
     }
@@ -62,15 +94,21 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
       color: #131415;
       display: inline-block;
       white-space: nowrap;
-      max-width: 250px;
       overflow: hidden;
       text-overflow: ellipsis;
       margin-bottom: 0;
       margin-left: 5px;
+      @media screen and (min-width: 270px) and (max-width: 374px){
+        max-width: 210px;
+      }
+      @media screen and (min-width: 375px){
+        max-width: 250px;
+      }
     }
   }
   .application-content-wrapper {
     padding-bottom: 200px;
+    padding-top: 80px;
     .opkg-tabs{
       @media screen and (min-width: 1024px){
         display: flex;
@@ -134,16 +172,41 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
       }
     }
 
+
     .open-pkg-application-content {
+      .activity-wrapper{
+        background-color: #F6F6F6;
+        border-radius: 4px;
+        @media screen and (min-width: 1200px){
+          padding: 57px 60px;
+        }
+        @media screen and (min-width: 992px) and (max-width: 1199px){
+          padding: 15px
+        }
+        @media screen and (max-width: 991px){
+          margin-top: 64px;
+          padding: 20px;
+        }
+        .activity-headline{
+          font-size: 28px;
+          line-height: 36px;
+          font-style: normal;
+          font-weight: bold;
+          align-items: center;
+          color: #131415;
+          margin-bottom: 24px;
+        }
+      }
+      .personal-data-wrapper{
+        @media screen and (min-width: 992px){
+          padding: 70px 15px;
+        }
+        @media screen and (max-width: 991px){
+          padding: 15px;
+        }
+      }
       .personal-data-wrapper,
       .activity-wrapper {
-        @media screen and (min-width: 768px){
-          padding: 70px 0;
-        }
-        @media screen and (max-width: 767px){
-          padding: 0;
-        }
-
         .application-main-headline {
           font-style: normal;
           font-weight: bold;
@@ -273,11 +336,50 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
         }
         .table-row{
           margin-top: 57px;
+          padding: 15px;
           .table-column:last-of-type {
             border-bottom: none;
           }
+          .activity-pagination{
+            margin: 35px auto 0;
+            .pagination{
+
+
+              .page-item{
+
+                .active-page {
+                  background: #136BC8 !important;
+                  border-radius: 4px;
+                  transition: .2s all;
+                  color: #ffffff !important;
+                  outline: 0px;
+                  width: 28px;
+                  height: 32px;
+                  text-align: center;
+                  padding: 10px;
+                }
+
+                .page-link{
+                  border: none;
+                  font-size: 12px;
+                  line-height: 100%;
+                  display: flex;
+                  align-items: center;
+                  color: #89898A;
+                  background: transparent;
+                  outline: none;
+                  transition: .2s all;
+                  width: 28px;
+                  height: 32px;
+                  text-align: center;
+                  padding: 10px;
+                }
+
+              }
+            }
+          }
           .table-column{
-            padding: 31px 20px;
+            padding: 20px;
             border-bottom: 1px solid #DFDFDF;
             .item-icon-wrapper{
               display: inline;
@@ -299,12 +401,15 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
             }
             .item-date-wrapper{
               display: inline;
+              right: 20px;
+              position: absolute;
               .item-date{
                 font-style: normal;
                 font-weight: normal;
                 font-size: 12px;
                 line-height: 100%;
                 color: #131415;
+                display: inline;
               }
             }
           }
@@ -373,6 +478,7 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0, 0.5);
+    left: 0;
     .download-pop-up,
     .delete-pop-up{
       display: block;
@@ -426,9 +532,24 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
         .download-progress{
           background-color: #136BC8;
           border-radius: 100px;
-          transition: .3s ease;
+          -webkit-transition: width 10s ease-in-out;
+          -moz-transition: width 10s ease-in-out;
+          -o-transition: width 10s ease-in-out;
+          transition: width 10s ease-in-out;
           height: 6px;
           width: 0;
+        }
+
+        .animate-download {
+          width: 100%;
+        }
+
+        .no-animation-width-100 {
+          width: 100%;
+          -webkit-transition: none;
+          -moz-transition: none;
+          -o-transition: none;
+          transition: none;
         }
       }
       .delete-data-button,

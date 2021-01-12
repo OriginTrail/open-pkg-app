@@ -233,7 +233,9 @@ module.exports = {
     async getPublicKey() {
         if (window.hasOwnProperty('ethereum') && window.ethereum.hasOwnProperty('isMetaMask')) {
 
-            if (window.ethereum._state.hasOwnProperty('accounts') && window.ethereum._state.accounts.length > 0) {
+            if (window.ethereum._state.hasOwnProperty('accounts')
+                && window.ethereum._state.accounts !== undefined
+                && window.ethereum._state.accounts.length > 0) {
 
                 return window.ethereum._state.accounts[0];
 
@@ -287,6 +289,9 @@ module.exports = {
                         resolve(null);
 
                     } else {
+
+                        document.dispatchEvent(new Event('open-pkg:metamask-signed:download'));
+
                         resolve(result.result);
                     }
                 });
