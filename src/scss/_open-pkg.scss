@@ -6,7 +6,15 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
 
   font-family: $roboto;
 
-  button:focus {outline:0;}
+  button:focus {
+    border: 0 none;
+    box-shadow: none !important;
+  }
+
+  a {
+    border: 0 none;
+    box-shadow: none !important;
+  }
 
   .open-pkg-header {
     background-color: #F6F6F6;
@@ -340,6 +348,10 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
           .table-column:last-of-type {
             border-bottom: none;
           }
+
+          .activity-record-wrapper {
+            min-height: 305px;
+          }
           .activity-pagination{
             margin: 35px auto 0;
             .pagination{
@@ -350,7 +362,6 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
                 .active-page {
                   background: #136BC8 !important;
                   border-radius: 4px;
-                  transition: .2s all;
                   color: #ffffff !important;
                   outline: 0px;
                   width: 28px;
@@ -368,7 +379,6 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
                   color: #89898A;
                   background: transparent;
                   outline: none;
-                  transition: .2s all;
                   width: 28px;
                   height: 32px;
                   text-align: center;

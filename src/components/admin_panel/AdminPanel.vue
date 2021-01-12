@@ -90,24 +90,27 @@
                                 <!-- ACTIVITY TABLE-->
                                 <div class="row table-row" id="activity">
 
-                                    <!--  ACTIVITY SINGLE ROW-->
-                                    <div class="col-md-12 table-column" v-for="(activity, index) in selectedActivities">
-                                        <div class="item-icon-wrapper">
-                                            <img class="item-icon"
-                                                 src="~@/assets/download.svg"
-                                                 alt="Download" v-if="activity.type === 'Downloaded'">
+                                    <div class="activity-record-wrapper">
+                                        <!--  ACTIVITY SINGLE ROW-->
+                                        <div class="col-md-12 table-column" v-for="(activity, index) in selectedActivities">
+                                            <div class="item-icon-wrapper">
+                                                <img class="item-icon"
+                                                     src="~@/assets/download.svg"
+                                                     alt="Download" v-if="activity.type === 'Downloaded'">
 
-                                            <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted"
-                                                 v-if="activity.type === 'Deleted'">
-                                        </div>
-                                        <div class="item-status-wrapper">
-                                            <span class="item-status">{{ activity.type }}</span>
-                                            <!-- <span>Deleted</span>-->
-                                        </div>
-                                        <div class="item-date-wrapper">
-                                            <span class="item-date">{{ activity.formatted_date }}</span>
+                                                <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted"
+                                                     v-if="activity.type === 'Deleted'">
+                                            </div>
+                                            <div class="item-status-wrapper">
+                                                <span class="item-status">{{ activity.type }}</span>
+                                                <!-- <span>Deleted</span>-->
+                                            </div>
+                                            <div class="item-date-wrapper">
+                                                <span class="item-date">{{ activity.formatted_date }}</span>
+                                            </div>
                                         </div>
                                     </div>
+
 
                                     <!--PAGINATION-->
                                     <nav aria-label="Page navigation example" class="activity-pagination" v-if="selectedActivities.length > 0">
@@ -522,6 +525,14 @@
         watch: {
             ETHEREUM(val) {
                 console.log(val, 'ethereum');
+            },
+            wallet(val) {
+
+                this.activities = [];
+
+                this.selectedActivities = [];
+
+                this.myPersonalData = [];
             }
         }
     }
