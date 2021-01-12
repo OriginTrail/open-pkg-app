@@ -292,6 +292,10 @@
         methods: {
             async getMyPersonalData() {
 
+                this.activities = [];
+
+                this.selectedActivities = [];
+
                 let personalDataResponse = await OpenPKG.getPersonalData();
 
                 if (personalDataResponse.hasOwnProperty('response') && typeof personalDataResponse.response === 'object') {
