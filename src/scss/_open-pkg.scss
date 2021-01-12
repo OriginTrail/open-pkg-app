@@ -5,6 +5,9 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
 #open-pkg-main-wrapper {
 
   font-family: $roboto;
+
+  button:focus {outline:0;}
+
   .open-pkg-header {
     background-color: #F6F6F6;
     @media screen and (min-width: 768px){
@@ -340,7 +343,22 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
           .activity-pagination{
             margin: 35px auto 0;
             .pagination{
+
+
               .page-item{
+
+                .active-page {
+                  background: #136BC8 !important;
+                  border-radius: 4px;
+                  transition: .2s all;
+                  color: #ffffff !important;
+                  outline: 0px;
+                  width: 28px;
+                  height: 32px;
+                  text-align: center;
+                  padding: 10px;
+                }
+
                 .page-link{
                   border: none;
                   font-size: 12px;
@@ -355,18 +373,6 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
                   height: 32px;
                   text-align: center;
                   padding: 10px;
-                  &:active,
-                  &:focus{
-                    background: #136BC8;
-                    border-radius: 4px;
-                    transition: .2s all;
-                    color: #ffffff;
-                    outline: 0px;
-                    width: 28px;
-                    height: 32px;
-                    text-align: center;
-                    padding: 10px;
-                  }
                 }
 
               }
@@ -472,6 +478,7 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
     width: 100%;
     height: 100%;
     background: rgba(0,0,0, 0.5);
+    left: 0;
     .download-pop-up,
     .delete-pop-up{
       display: block;
@@ -525,9 +532,24 @@ $roboto: '-apple-system,BlinkMacSystemFont,Roboto', sans-serif;
         .download-progress{
           background-color: #136BC8;
           border-radius: 100px;
-          transition: .3s ease;
+          -webkit-transition: width 10s ease-in-out;
+          -moz-transition: width 10s ease-in-out;
+          -o-transition: width 10s ease-in-out;
+          transition: width 10s ease-in-out;
           height: 6px;
           width: 0;
+        }
+
+        .animate-download {
+          width: 100%;
+        }
+
+        .no-animation-width-100 {
+          width: 100%;
+          -webkit-transition: none;
+          -moz-transition: none;
+          -o-transition: none;
+          transition: none;
         }
       }
       .delete-data-button,

@@ -1,5 +1,5 @@
 <template>
-    <div id="open-pkg-main-wrapper" v-if="wallet !== null">
+    <div id="open-pkg-main-wrapper" v-if="wallet !== null && renderApplication">
         <div class="container-fluid">
             <div class="row open-pkg-header">
                 <div class="col-md-12">
@@ -37,10 +37,12 @@
                                     website, and can download the file when it is ready. Requesting data is only
                                     possible if you are signed into OpenPKG.
                                 </p>
-                                <button @click="showDownloadContainer()" type="button"
-                                        class="btn get-personal-data-btn">GET MY
-                                    PERSONAL DATA
+
+                                <button @click="getPersonalDataPopup()" type="button"
+                                        class="btn get-personal-data-btn">
+                                    GET MY PERSONAL DATA
                                 </button>
+
                                 <div class="separator"></div>
                                 <h2 class="application-medium-headline">
                                     Delete personal data
@@ -50,7 +52,7 @@
                                     website based on your DID. You can trigger the request below and receive
                                     confirmation in the Activity log once deletion is finalised.
                                 </p>
-                                <button type="button" @click="showDeleteContainer()"
+                                <button type="button" @click="deletePersonalDataPopup()"
                                         class="btn get-personal-data-btn">
                                     DELETE PERSONAL DATA
                                 </button>
@@ -89,104 +91,39 @@
                                 <div class="row table-row" id="activity">
 
                                     <!--  ACTIVITY SINGLE ROW-->
-                                    <div class="col-md-12 table-column">
+                                    <div class="col-md-12 table-column" v-for="(activity, index) in selectedActivities">
                                         <div class="item-icon-wrapper">
                                             <img class="item-icon"
                                                  src="~@/assets/download.svg"
-                                                 alt="Download">
-                                            <!-- <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
+                                                 alt="Download" v-if="activity.type === 'Downloaded'">
+
+                                             <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted" v-if="activity.type === 'Deleted'">
                                         </div>
                                         <div class="item-status-wrapper">
-                                            <span class="item-status">Downloaded</span>
+                                            <span class="item-status">{{ activity.type }}</span>
                                             <!-- <span>Deleted</span>-->
                                         </div>
                                         <div class="item-date-wrapper">
-                                            <span class="item-date">20.11.2020</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- ACTIVITY SINGLE ROW-->
-                                    <div class="col-md-12 table-column">
-                                        <div class="item-icon-wrapper">
-                                            <!-- <img class="item-icon" src="~@/assets/download.svg" alt="Download">-->
-                                            <img class="item-icon"
-                                                 src="~@/assets/trash.svg"
-                                                 alt="Deleted">
-                                        </div>
-                                        <div class="item-status-wrapper">
-                                            <!-- <span class="item-status">Downloaded</span>-->
-                                            <span class="item-status">Deleted</span>
-                                        </div>
-                                        <div class="item-date-wrapper">
-                                            <span class="item-date">20.11.2020</span>
-                                        </div>
-                                    </div>
-
-                                    <!--ACTIVITY SINGLE ROW-->
-                                    <div class="col-md-12 table-column">
-                                        <div class="item-icon-wrapper">
-                                            <img class="item-icon"
-                                                 src="~@/assets/download.svg"
-                                                 alt="Download">
-                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
-                                        </div>
-                                        <div class="item-status-wrapper">
-                                            <span class="item-status">Downloaded</span>
-                                            <!--<span class="item-status">Deleted</span>-->
-                                        </div>
-                                        <div class="item-date-wrapper">
-                                            <span class="item-date">20.11.2020</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 table-column">
-                                        <div class="item-icon-wrapper">
-                                            <img class="item-icon"
-                                                 src="~@/assets/download.svg"
-                                                 alt="Download">
-                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
-                                        </div>
-                                        <div class="item-status-wrapper">
-                                            <span class="item-status">Downloaded</span>
-                                            <!--<span class="item-status">Deleted</span>-->
-                                        </div>
-                                        <div class="item-date-wrapper">
-                                            <span class="item-date">20.11.2020</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 table-column">
-                                        <div class="item-icon-wrapper">
-                                            <img class="item-icon"
-                                                 src="~@/assets/download.svg"
-                                                 alt="Download">
-                                            <!--<img class="item-icon" src="~@/assets/trash.svg" alt="Deleted">-->
-                                        </div>
-                                        <div class="item-status-wrapper">
-                                            <span class="item-status">Downloaded</span>
-                                            <!--<span class="item-status">Deleted</span>-->
-                                        </div>
-                                        <div class="item-date-wrapper">
-                                            <span class="item-date">20.11.2020</span>
+                                            <span class="item-date">{{ activity.formatted_date }}</span>
                                         </div>
                                     </div>
 
                                     <!--PAGINATION-->
                                     <nav aria-label="Page navigation example" class="activity-pagination">
                                         <ul class="pagination">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
+                                            <li class="page-item" v-if="selectedActivities.length > 0">
+                                                <a @click="selectPage(1)" class="page-link" href="javascript:void(0)" aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
                                             </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
+                                            <li class="page-item" v-for="index in numberOfPages" :key="index">
+                                                <a class="page-link"
+                                                   :class="(selectedPage === index ? 'active-page' : '')"
+                                                   href="javascript:void(0)" @click="selectPage(index)">{{ index }}</a>
+                                            </li>
+                                            <li class="page-item" v-if="selectedActivities.length > 0">
+                                                <a @click="selectPage(numberOfPages)" class="page-link" href="javascript:void(0)" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <span class="sr-only">Next</span>
                                                 </a>
@@ -202,10 +139,11 @@
         </div> <!-- END Application container -->
 
         <!--        Inner Download pop-up container-->
-        <div id="download-data-pop-up-container" class="download-container-disabled">
+        <div id="download-data-pop-up-container" class="download-container-disabled"
+             :class="(downloadActive) ? 'download-container-active' : ''">
             <div id="download-data-pop-up" class="download-pop-up">
-                <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
-                     class="pop-up-close-button" id="close-pop-up-metamask" alt="X">
+                <img src="~@/assets/close-img.svg"
+                     class="pop-up-close-button" id="close-pop-up-metamask" alt="X" @click="downloadActive = false">
                 <h2 class="pop-up-header">
                     Downloading...
                 </h2>
@@ -213,13 +151,14 @@
                     Download of personal data is in progress. This can take a while.
                 </p>
                 <div class="download-bar">
-                    <div class="download-progress" id="download-progress-animation"></div>
+                    <div class="download-progress" id="download-progress-animation"
+                         :class="[(progressActive) ? 'animate-download' : '', (fetchingDataFinished) ? 'no-animation-width-100' : '']"></div>
                 </div>
             </div>
         </div>
 
         <!--       Inner Delete pop-up container-->
-        <div id="delete-data-pop-up-container" class="delete-container-disabled">
+        <div id="delete-data-pop-up-container" class="delete-container-disabled" :class="(showDeletePopup) ? 'delete-container-active' : ''">
             <div id="delete-data-pop-up" class="delete-pop-up">
                 <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
                      class="pop-up-close-button" id="close-pop-up-metamask" alt="X">
@@ -231,17 +170,17 @@
                     Are you sure you want to delete personal data?
                 </p>
                 <div class="popup-btns-wrapper">
-                    <button @click="closePopUpContainer()" id="cancel-sign-in-btn" class="cancel-delete-data">
+                    <button @click="showDeletePopup = false" id="cancel-sign-in-btn" class="cancel-delete-data">
                         CANCEL
                     </button>
-                    <button id="sign-in-metamask-btn" class="delete-data-button">DELETE</button>
+                    <button id="sign-in-metamask-btn" class="delete-data-button" @click="deletePersonalData()">DELETE</button>
                 </div>
             </div>
         </div>
 
 
         <!--Inner Validation pop-up container-->
-        <div id="validate-data-pop-up-container" class="validation-container-disabled">
+        <div id="validate-data-pop-up-container" class="validation-container-disabled" :class="(showValidation) ? 'validation-container-active' : ''">
             <div id="validation-data-pop-up" class="validation-pop-up">
                 <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
                      class="pop-up-close-button" id="close-pop-up-metamask" alt="X">
@@ -265,17 +204,45 @@
 
     import "./admin_panel_main.js";
 
+    import * as OpenPKG from '../sdk/OpenPKG.js';
+
     export default {
         name: "AdminPanel",
         data() {
             return {
-                wallet: '0x7778830314',
+                wallet: null,
+                showDeletePopup: false,
+                showValidation: false,
+                downloadActive: false,
+                progressActive: false,
+                activities: [],
+                myPersonalData: [],
+                renderApplication: true,
+                ETHEREUM: window.ethereum,
+                fetchingDataFinished: false,
+                pageSize: 5,
+                pageNumber: 1,
+                selectedPage: 1,
+                totalNumberOfActivities: 0,
+                numberOfPages: 0,
+                selectedActivities: []
             }
         },
         mounted() {
+
             this.listenEthereumEvents();
 
             this.checkIfMemataskIsSigned();
+
+            document.addEventListener('open-pkg:metamask-signed:download', (e) => {
+                this.progressActive = true;
+            });
+
+            document.addEventListener('open-pkg:metamask-signed:download:close', (e) => {
+                this.downloadActive = false;
+                this.progressActive = false;
+                this.fetchingDataFinished = false
+            });
 
             // terms and conditions activate/disable buttons
             $('#terms-and-conditions-checkbox').click(function () {
@@ -317,19 +284,87 @@
             });
         },
         methods: {
+            async getMyPersonalData() {
+
+                let personalDataResponse = await OpenPKG.getPersonalData();
+
+                if (personalDataResponse.hasOwnProperty('response') && typeof personalDataResponse.response === 'object') {
+
+                    let processed = 0;
+
+                    personalDataResponse.response.forEach((row, index) => {
+
+                        if (row.hasOwnProperty('claim')) {
+
+                            row.timestamp_post = row.claim.request.timestamp;
+                            row.type = this.getActivityType(row.claim.request.message);
+
+                            row.formatted_date = this.formatDate(row.claim.request.timestamp);
+
+                            this.activities.push(row);
+
+                        } else {
+                            this.myPersonalData.push(row);
+                        }
+
+                        processed++;
+
+                        if (processed === personalDataResponse.response.length) {
+
+                            this.totalNumberOfActivities = this.activities.length;
+
+                            this.activities.sort((a, b) => (a.timestamp_post < b.timestamp_post) ? 1 : -1);
+
+                            this.numberOfPages = Math.ceil(this.totalNumberOfActivities / this.pageSize);
+
+                            this.selectPage(1);
+
+                            return true;
+                        }
+                    });
+
+                } else {
+                    return false;
+                }
+            },
+            getActivityType(message) {
+                switch (message) {
+                    case "I send DSAR_DEL request":
+                        return "Deleted";
+
+                    case "I send DSAR request":
+                        return "Downloaded";
+                    default:
+                        return "Unknown"
+                }
+
+            },
+            formatDate(timestamp) {
+                let d = new Date(timestamp);
+                return d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear();
+            },
+            selectPage(pageNumber) {
+
+                this.selectedPage = pageNumber;
+
+                let end = this.selectedPage * this.pageSize;
+                let start = end - this.pageSize;
+
+                this.selectedActivities = this.activities.slice(start, end);
+            },
             checkIfMemataskIsSigned() {
 
                 if (window.ethereum && window.ethereum.isMetaMask) {
 
-                    if (window.ethereum._state.accounts.length > 0) {
+                    if (window.ethereum._state.hasOwnProperty('accounts')
+                        && window.ethereum._state.accounts !== undefined
+                        && window.ethereum._state.accounts.length > 0) {
 
-                        console.log('already connected');
 
                         this.wallet = window.ethereum._state.accounts[0];
 
                     } else {
 
-                        console.log('not connected');
                     }
 
                 } else {
@@ -378,9 +413,76 @@
 
 
             // SHOW download popup
-            showDownloadContainer() {
-                $('#download-data-pop-up-container').addClass('download-container-active');
-                $('#download-progress-animation').animate({width: '100%'}, 3500)
+            getPersonalDataPopup() {
+
+                this.downloadActive = true;
+
+                this.getMyPersonalData().then(response => {
+
+                    this.fetchingDataFinished = true;
+
+                    setTimeout(() => {
+                        let date = (new Date()).toLocaleDateString("fr-CA");
+                        let filename = `${date}-my-personal-data`;
+                        let extension = 'json';
+
+                        this.saveJson(this.myPersonalData, filename, extension);
+                    }, 500);
+                });
+            },
+
+            deletePersonalDataPopup() {
+                this.showDeletePopup = true;
+            },
+
+            async deletePersonalData() {
+                let deleteDataResult = await OpenPKG.deletePersonalData();
+
+                this.showDeletePopup = false;
+
+                this.activities = [];
+
+                this.selectedActivities = [];
+
+                return deleteDataResult;
+            },
+
+            saveJson(obj, name, extension) {
+                let str;
+                let type;
+                if (typeof obj === 'string') {
+                    str = obj;
+                    type = 'text/plain';
+
+                } else {
+                    str = JSON.stringify(obj, null, 2);
+                    type = 'application/octet-stream';
+                }
+                let data = this.encode(str);
+
+                let filename = name + '.' + extension;
+
+                let blob = new Blob([str], {
+                    type: type
+                });
+
+                let url = URL.createObjectURL(blob);
+                let link = document.createElement('a');
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                let event = document.createEvent('MouseEvents');
+                event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+                link.dispatchEvent(event);
+
+                document.dispatchEvent(new Event('open-pkg:metamask-signed:download:close'));
+
+            },
+            encode(s) {
+                let out = [];
+                for (let i = 0; i < s.length; i++) {
+                    out[i] = s.charCodeAt(i);
+                }
+                return new Uint8Array(out);
             },
 
             // Show delete popup
@@ -392,15 +494,16 @@
 
             // Show Validation popup
             showValidationPopUp() {
-                $('#validate-data-pop-up-container').addClass('validation-container-active');
-                $('#delete-data-pop-up').addClass('delete-pop-up');
+                this.showValidation = true;
             },
 
             closePopUpContainer() {
-                $('#validate-data-pop-up-container').removeClass('validation-container-active');
-                $('#delete-data-pop-up-container').removeClass('delete-container-active');
-                $('#download-data-pop-up-container').removeClass('download-container-active');
-                $('#download-progress-animation').animate({width: '0'}, 0)
+                this.showValidation = false;
+            }
+        },
+        watch: {
+            ETHEREUM(val) {
+                console.log(val, 'ethereum');
             }
         }
     }
