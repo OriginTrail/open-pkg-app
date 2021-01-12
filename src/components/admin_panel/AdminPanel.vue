@@ -97,7 +97,8 @@
                                                  src="~@/assets/download.svg"
                                                  alt="Download" v-if="activity.type === 'Downloaded'">
 
-                                             <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted" v-if="activity.type === 'Deleted'">
+                                            <img class="item-icon" src="~@/assets/trash.svg" alt="Deleted"
+                                                 v-if="activity.type === 'Deleted'">
                                         </div>
                                         <div class="item-status-wrapper">
                                             <span class="item-status">{{ activity.type }}</span>
@@ -112,7 +113,8 @@
                                     <nav aria-label="Page navigation example" class="activity-pagination">
                                         <ul class="pagination">
                                             <li class="page-item" v-if="selectedActivities.length > 0">
-                                                <a @click="selectPage(1)" class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                <a @click="selectPage(1)" class="page-link" href="javascript:void(0)"
+                                                   aria-label="Previous">
                                                     <span aria-hidden="true">&laquo;</span>
                                                     <span class="sr-only">Previous</span>
                                                 </a>
@@ -123,7 +125,8 @@
                                                    href="javascript:void(0)" @click="selectPage(index)">{{ index }}</a>
                                             </li>
                                             <li class="page-item" v-if="selectedActivities.length > 0">
-                                                <a @click="selectPage(numberOfPages)" class="page-link" href="javascript:void(0)" aria-label="Next">
+                                                <a @click="selectPage(numberOfPages)" class="page-link"
+                                                   href="javascript:void(0)" aria-label="Next">
                                                     <span aria-hidden="true">&raquo;</span>
                                                     <span class="sr-only">Next</span>
                                                 </a>
@@ -158,7 +161,8 @@
         </div>
 
         <!--       Inner Delete pop-up container-->
-        <div id="delete-data-pop-up-container" class="delete-container-disabled" :class="(showDeletePopup) ? 'delete-container-active' : ''">
+        <div id="delete-data-pop-up-container" class="delete-container-disabled"
+             :class="(showDeletePopup) ? 'delete-container-active' : ''">
             <div id="delete-data-pop-up" class="delete-pop-up">
                 <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
                      class="pop-up-close-button" id="close-pop-up-metamask" alt="X">
@@ -173,14 +177,16 @@
                     <button @click="showDeletePopup = false" id="cancel-sign-in-btn" class="cancel-delete-data">
                         CANCEL
                     </button>
-                    <button id="sign-in-metamask-btn" class="delete-data-button" @click="deletePersonalData()">DELETE</button>
+                    <button id="sign-in-metamask-btn" class="delete-data-button" @click="deletePersonalData()">DELETE
+                    </button>
                 </div>
             </div>
         </div>
 
 
         <!--Inner Validation pop-up container-->
-        <div id="validate-data-pop-up-container" class="validation-container-disabled" :class="(showValidation) ? 'validation-container-active' : ''">
+        <div id="validate-data-pop-up-container" class="validation-container-disabled"
+             :class="(showValidation) ? 'validation-container-active' : ''">
             <div id="validation-data-pop-up" class="validation-pop-up">
                 <img @click="closePopUpContainer()" src="~@/assets/close-img.svg"
                      class="pop-up-close-button" id="close-pop-up-metamask" alt="X">
@@ -297,11 +303,15 @@
                         if (row.hasOwnProperty('claim')) {
 
                             row.timestamp_post = row.claim.request.timestamp;
-                            row.type = this.getActivityType(row.claim.request.message);
 
-                            row.formatted_date = this.formatDate(row.claim.request.timestamp);
+                            if (row.claim.request.hasOwnProperty('message')) {
 
-                            this.activities.push(row);
+                                row.type = this.getActivityType(row.claim.request.message);
+
+                                row.formatted_date = this.formatDate(row.claim.request.timestamp);
+
+                                this.activities.push(row);
+                            }
 
                         } else {
                             this.myPersonalData.push(row);
@@ -341,7 +351,7 @@
             },
             formatDate(timestamp) {
                 let d = new Date(timestamp);
-                return d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear();
+                return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear();
             },
             selectPage(pageNumber) {
 
