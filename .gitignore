@@ -25,3 +25,5 @@ pnpm-debug.log*
 admin_panel
 sdk
 sign_in_popup
+
+open-pkg.config-real.json
