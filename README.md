@@ -34,9 +34,9 @@ After successful compilation of the main components in the open-pkg-app folder t
 
 
 
-##Implementation:
+## Implementation:
 
-####Admin Panel
+#### Admin Panel
 
 Paste following code snippet on the page dedicated to OpenPKG Admin Panel and change your path to the “admin-panel.min.js” script:
 ```
@@ -45,7 +45,7 @@ Paste following code snippet on the page dedicated to OpenPKG Admin Panel and ch
 ```
 
 
-####Sign in popup
+#### Sign in popup
 
 In order to get Sign In popup on your website pages paste the following code snippet and change your path to the “open-pkg-sign.min.js” script:
 ```
@@ -54,7 +54,7 @@ In order to get Sign In popup on your website pages paste the following code sni
 ```
 
 
-####OpenPKG SDK
+#### OpenPKG SDK
 In order to get OpenPKG SKD object on your website pages paste the following code snippet and change your path to the “OpenPKG.umd.min.js” script:
 ```
 <script src="./sdk/OpenPKG.umd.min.js"></script>
