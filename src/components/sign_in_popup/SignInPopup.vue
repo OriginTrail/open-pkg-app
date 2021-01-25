@@ -86,14 +86,22 @@
                 showTerms: false,
                 termsCheckInput: false,
                 termsAccepted: false,
-                metamaskSignedIn: false
+                metamaskSignedIn: false,
+                isConnected: false,
+                accounts: null
             }
         },
         mounted() {
 
-            this.checkIfMemataskIsSigned();
+            this.isConnected = window.ethereum._state.isConnected;
+
+            this.accounts = window.ethereum._state.accounts;
 
             this.listenEthereumEvents();
+
+            setTimeout(() => {
+                this.checkIfMemataskIsSigned();
+            }, 1000);
 
         },
         methods: {
@@ -102,9 +110,8 @@
                 if (window.ethereum && window.ethereum.isMetaMask) {
 
                     if (window.ethereum._state.hasOwnProperty('accounts')
-                        && window.ethereum._state.accounts !== undefined
+                        && window.ethereum._state.accounts !== null
                         && window.ethereum._state.accounts.length > 0) {
-
 
                         this.wallet = window.ethereum._state.accounts[0];
 
@@ -141,8 +148,6 @@
 
                 window.ethereum.on('accountsChanged', (accounts) => {
 
-                    console.log('accoutn');
-
                     if(accounts.length === 0) {
                         this.wallet = null;
                         this.metamaskSignedIn = false;
@@ -159,7 +164,7 @@
 
                 const ethEnabled = () => {
                     if (window.ethereum) {
-                        window.web3 = new Web3(window.ethereum);
+                        window.web3 = new window.Web3(window.ethereum);
                         window.ethereum.enable();
                         return true;
                     }
@@ -204,6 +209,16 @@
                 $('#delete-data-pop-up-container').removeClass('delete-container-active');
                 $('#download-data-pop-up-container').removeClass('download-container-active');
                 $('#download-progress-animation').animate({width: '0'}, 0)
+            }
+        },
+        watch: {
+            isConnected(val) {
+                if(val) {
+                    // this.checkIfMemataskIsSigned();
+                }
+            },
+            accounts(val) {
+                console.log(val, 'accounts');
             }
         }
     }

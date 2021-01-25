@@ -234,14 +234,19 @@
                 selectedPage: 1,
                 totalNumberOfActivities: 0,
                 numberOfPages: 0,
-                selectedActivities: []
+                selectedActivities: [],
+                isConnected: false
             }
         },
         mounted() {
 
+            this.isConnected = window.ethereum._state.isConnected;
+
             this.listenEthereumEvents();
 
-            this.checkIfMemataskIsSigned();
+            setTimeout(() => {
+                this.checkIfMemataskIsSigned();
+            }, 1000);
 
             document.addEventListener('open-pkg:metamask-signed:download', (e) => {
                 this.progressActive = true;
@@ -303,48 +308,94 @@
 
                 let personalDataResponse = await OpenPKG.getPersonalData();
 
-                if (personalDataResponse.hasOwnProperty('response') && typeof personalDataResponse.response === 'object') {
 
-                    let processed = 0;
+                if(personalDataResponse.hasOwnProperty('response')) {
+                    this.myPersonalData = personalDataResponse.response;
+                }
 
-                    personalDataResponse.response.forEach((row, index) => {
+                if(personalDataResponse.hasOwnProperty('logs') && typeof personalDataResponse.logs === 'object') {
 
-                        if (row.hasOwnProperty('claim')) {
+                    if(personalDataResponse.logs.length > 0) {
 
-                            row.timestamp_post = row.claim.request.timestamp;
+                        let processed = 0;
 
-                            if (row.claim.request.hasOwnProperty('message')) {
+                        personalDataResponse.logs.forEach((row, index) => {
 
-                                row.type = this.getActivityType(row.claim.request.message);
+                            if(row.hasOwnProperty('claim') && row.claim.hasOwnProperty('request')) {
 
-                                row.formatted_date = this.formatDate(row.claim.request.timestamp);
+                                row.timestamp_post = row.claim.request.timestamp;
 
-                                this.activities.push(row);
+                                if(row.claim.request.hasOwnProperty('message')) {
+
+                                    row.type = this.getActivityType(row.claim.request.message);
+
+                                    row.formatted_date = this.formatDate(row.claim.request.timestamp);
+
+                                    this.activities.push(row);
+                                }
                             }
 
-                        } else {
-                            this.myPersonalData.push(row);
-                        }
+                            processed++;
 
-                        processed++;
+                            if (processed === personalDataResponse.logs.length) {
 
-                        if (processed === personalDataResponse.response.length) {
+                                this.totalNumberOfActivities = this.activities.length;
 
-                            this.totalNumberOfActivities = this.activities.length;
+                                this.activities.sort((a, b) => (a.timestamp_post < b.timestamp_post) ? 1 : -1);
 
-                            this.activities.sort((a, b) => (a.timestamp_post < b.timestamp_post) ? 1 : -1);
+                                this.numberOfPages = Math.ceil(this.totalNumberOfActivities / this.pageSize);
 
-                            this.numberOfPages = Math.ceil(this.totalNumberOfActivities / this.pageSize);
+                                this.selectPage(1);
 
-                            this.selectPage(1);
+                                return true;
+                            }
 
-                            return true;
-                        }
-                    });
+                        });
+                    }
+                 }
 
-                } else {
-                    return false;
-                }
+                // if (personalDataResponse.hasOwnProperty('response') && typeof personalDataResponse.response === 'object') {
+                //
+                //     let processed = 0;
+                //
+                //     personalDataResponse.response.forEach((row, index) => {
+                //
+                //         if (row.hasOwnProperty('claim')) {
+                //
+                //             row.timestamp_post = row.claim.request.timestamp;
+                //
+                //             if (row.claim.request.hasOwnProperty('message')) {
+                //
+                //                 row.type = this.getActivityType(row.claim.request.message);
+                //
+                //                 row.formatted_date = this.formatDate(row.claim.request.timestamp);
+                //
+                //                 this.activities.push(row);
+                //             }
+                //
+                //         } else {
+                //             this.myPersonalData.push(row);
+                //         }
+                //
+                //         processed++;
+                //
+                //         if (processed === personalDataResponse.response.length) {
+                //
+                //             this.totalNumberOfActivities = this.activities.length;
+                //
+                //             this.activities.sort((a, b) => (a.timestamp_post < b.timestamp_post) ? 1 : -1);
+                //
+                //             this.numberOfPages = Math.ceil(this.totalNumberOfActivities / this.pageSize);
+                //
+                //             this.selectPage(1);
+                //
+                //             return true;
+                //         }
+                //     });
+                //
+                // } else {
+                //     return false;
+                // }
             },
             getActivityType(message) {
                 switch (message) {
@@ -533,6 +584,11 @@
                 this.selectedActivities = [];
 
                 this.myPersonalData = [];
+            },
+            isConnected(val) {
+                if (val) {
+                    // this.checkIfMemataskIsSigned();
+                }
             }
         }
     }

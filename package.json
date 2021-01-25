@@ -8,6 +8,7 @@
     "build:sdk": "vue-cli-service build --target lib --dest sdk --name OpenPKG src/components/sdk/OpenPKG.js",
     "build:sdk:watch": "vue-cli-service build --target lib --dest sdk --name OpenPKG src/components/sdk/OpenPKG.js --watch",
     "build:sign-in-popup": "vue-cli-service build --target wc --dest sign_in_popup  --name open-pkg-sign --inline-vue src/components/sign_in_popup/SignInPopup.vue",
+    "build:sign-in-popup:watch": "vue-cli-service build --target wc --dest sign_in_popup  --name open-pkg-sign --inline-vue src/components/sign_in_popup/SignInPopup.vue --watch",
     "build:admin-panel": "vue-cli-service build --target wc --dest admin_panel  --name admin-panel --inline-vue src/components/admin_panel/AdminPanel.vue",
     "build:admin-panel:watch": "vue-cli-service build --target wc --dest admin_panel  --name admin-panel --inline-vue src/components/admin_panel/AdminPanel.vue --watch"
   },
