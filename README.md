@@ -20,9 +20,9 @@
 4. Compile main components (AdminPanel, SignInPopup and OpenPKG SDK)
 
 ```
-	npm run build:admin-panel
-	npm run build:sign-in-popup
-	npm run build:sdk
+npm run build:admin-panel
+npm run build:sign-in-popup
+npm run build:sdk
 ```
 
 After successful compilation of the main components in the open-pkg-app folder there should be three directories:
