@@ -74,35 +74,35 @@ module.exports = {
     },
 
     // data publishing
-    async publishPersonalData() {
-
-        if (this.configIsReady()) {
-
-            let requestBody = {};
-
-            let result = await PipelineService.triggerPipelineInstance(EndPoint, dataPublishingPipelineInstanceId, Token, requestBody);
-
-            if(result.hasOwnProperty('status') && result.status === 'COMPLETED') {
-
-                if(result.hasOwnProperty('data') && result.data.hasOwnProperty('pipeline_instance_id')) {
-
-                    const pipelineInstanceId = result.data.pipeline_instance_id;
-
-                    let pipelineResult = await PipelineService.getPipelineInstanceResult(EndPoint, pipelineInstanceId, Token);
-
-                    if(PipelineService.isNotFinished(pipelineResult)) {
-
-                        let response = { status : 'Publishing has being started successfully.'};
-                        console.log(response, 'publish data result');
-                        return response;
-
-                    } else {
-                        return { status : 'FAILED'};
-                    }
-                }
-            }
-        }
-    },
+    // async publishPersonalData() {
+    //
+    //     if (this.configIsReady()) {
+    //
+    //         let requestBody = {};
+    //
+    //         let result = await PipelineService.triggerPipelineInstance(EndPoint, dataPublishingPipelineInstanceId, Token, requestBody);
+    //
+    //         if(result.hasOwnProperty('status') && result.status === 'COMPLETED') {
+    //
+    //             if(result.hasOwnProperty('data') && result.data.hasOwnProperty('pipeline_instance_id')) {
+    //
+    //                 const pipelineInstanceId = result.data.pipeline_instance_id;
+    //
+    //                 let pipelineResult = await PipelineService.getPipelineInstanceResult(EndPoint, pipelineInstanceId, Token);
+    //
+    //                 if(PipelineService.isNotFinished(pipelineResult)) {
+    //
+    //                     let response = { status : 'Publishing has being started successfully.'};
+    //                     console.log(response, 'publish data result');
+    //                     return response;
+    //
+    //                 } else {
+    //                     return { status : 'FAILED'};
+    //                 }
+    //             }
+    //         }
+    //     }
+    // },
 
     // data request
     async getPersonalData() {
