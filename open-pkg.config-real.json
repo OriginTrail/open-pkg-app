@@ -1,0 +1,7 @@
+{
+  "backendDomain" : "http://ubuntu@ec2-18-159-62-113.eu-central-1.compute.amazonaws.com:3100",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiZGVtb0BvcmlnaW4tdHJhaWwuY29tIiwiaWF0IjoxNjExMzI3Njk2fQ.OzGTh_x8x6Uw7tqpnCMHhsLL99gPADqyOsvukF6jzcM",
+  "identity" : "https://staging.tracelabs.io"
+}
+
+
