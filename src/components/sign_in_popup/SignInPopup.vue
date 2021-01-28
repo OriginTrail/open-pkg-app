@@ -14,8 +14,7 @@
                     Protect your data by using OpenPKG
                 </h2>
                 <p class="pop-up-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
+                    By using OpenPKG, your personal data will get connected to your identity and give you full control over managing it. We are in beta - please familiarise yourself with the risks in Terms of Use.
                 </p>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" v-model="termsCheckInput" id="terms-and-conditions-checkbox" @change="changedTerms">
