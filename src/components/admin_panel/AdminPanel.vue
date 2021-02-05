@@ -23,7 +23,7 @@
                                     did:ethr:{{ wallet }}</p>
                             </div>
                             <div class="personal-data-wrapper display-personal-data" id="personal-data">
-                                <h1 class="application-main-headline">OpenPKG</h1>
+                                <h1 class="application-main-headline">OpenPKG admin panel</h1>
                                 <p class="large-text large-spacing">
                                     Own your data. Use OpenPKG to discover what personal data organisations hold about
                                     you, validate it or request its automated deletion.
@@ -80,11 +80,9 @@
                                         did:ethr:{{ wallet }}</p>
                                 </div>
 
-                                <h1 class="activity-headline">Activity log</h1>
-                                <p class="regular-text medium-spacing">
-                                    Nunc ultricies habitant luctus condimentum eu, risus. Vulputate nam phasellus mi
-                                    curabitur
-                                    phasellus tincidunt adipiscing eget dolor.
+                                <h1 class="activity-headline">OpenPKG Activity</h1>
+                                <p class="regular-text medium-spacing" v-if="selectedActivities.length === 0">
+                                    In order to view your activity log, please click "Get my personal data" on the left to fetch the log.
                                 </p>
 
                                 <!-- ACTIVITY TABLE-->
@@ -183,6 +181,15 @@
                     <button id="sign-in-metamask-btn" class="delete-data-button" @click="deletePersonalData()">DELETE
                     </button>
                 </div>
+
+                <div class="loading-wrapper-custom" v-if="deletingInProgress">
+                    <div class="background-loading">
+
+                    </div>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Deleting personal data. Please wait!</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -235,7 +242,8 @@
                 totalNumberOfActivities: 0,
                 numberOfPages: 0,
                 selectedActivities: [],
-                isConnected: false
+                isConnected: false,
+                deletingInProgress: false
             }
         },
         mounted() {
@@ -309,10 +317,12 @@
                 let personalDataResponse = await OpenPKG.getPersonalData();
 
 
+                //PERSONAL DATA
                 if(personalDataResponse.hasOwnProperty('response')) {
                     this.myPersonalData = personalDataResponse.response;
                 }
 
+                //LOGS
                 if(personalDataResponse.hasOwnProperty('logs') && typeof personalDataResponse.logs === 'object') {
 
                     if(personalDataResponse.logs.length > 0) {
@@ -487,6 +497,8 @@
 
                 this.downloadActive = true;
 
+                $('.download-progress').css('width', 0);
+
                 this.getMyPersonalData().then(response => {
 
                     this.fetchingDataFinished = true;
@@ -506,19 +518,44 @@
             },
 
             async deletePersonalData() {
+                this.deletingInProgress = true;
+
                 let deleteDataResult = await OpenPKG.deletePersonalData();
 
                 this.showDeletePopup = false;
 
-                this.activities = [];
+                this.activities = this.getActivitiesAfterDelete();
 
-                this.selectedActivities = [];
+                this.totalNumberOfActivities = this.activities.length;
 
-                this.numberOfPages = 0;
+                this.activities.sort((a, b) => (a.timestamp_post < b.timestamp_post) ? 1 : -1);
+
+                this.numberOfPages = Math.ceil(this.totalNumberOfActivities / this.pageSize);
+
+                this.selectPage(1);
+
+                this.deletingInProgress = false;
 
                 return deleteDataResult;
             },
+            getActivitiesAfterDelete() {
 
+                let array = [];
+
+                let deletedObject = {};
+                deletedObject['@context'] = [];
+                deletedObject.claim = {};
+                deletedObject.expires = '';
+                deletedObject.timestamp_post = Date.now();
+                deletedObject.formatted_date = this.formatDate(deletedObject.timestamp_post);
+                deletedObject.id = `did:ethr:${this.wallet}`;
+                deletedObject.issuer = `did:ethr:${this.wallet}`;
+                deletedObject.type = 'Deleted';
+
+                array.push(deletedObject);
+
+                return array;
+            },
             saveJson(obj, name, extension) {
                 let str;
                 let type;
@@ -575,7 +612,7 @@
         },
         watch: {
             ETHEREUM(val) {
-                console.log(val, 'ethereum');
+
             },
             wallet(val) {
 

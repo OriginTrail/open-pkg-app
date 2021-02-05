@@ -111,8 +111,6 @@ module.exports = {
 
                 case 'IN PROGRESS' :
 
-                    console.log('in progress je');
-
                     await this.wait(5000);
                     break;
 

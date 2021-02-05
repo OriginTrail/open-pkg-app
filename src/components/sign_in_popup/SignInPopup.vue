@@ -14,21 +14,21 @@
                     Protect your data by using OpenPKG
                 </h2>
                 <p class="pop-up-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
+                    By using OpenPKG, your personal data will get connected to your identity and give you full control over managing it. We are in beta - please familiarise yourself with the risks in Terms of Use.
                 </p>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" v-model="termsCheckInput" id="terms-and-conditions-checkbox" @change="changedTerms">
                     <label class="form-check-label" for="terms-and-conditions-checkbox">
                         I accept <span class="checkbox-bold-text">Terms and Conditions</span>
                     </label>
+
                 </div>
                 <p class="pop-up-text-small">
                     *In order to accept you’ll need to have your MetaMask installed
                 </p>
                 <div class="pop-up-buttons-wrapper">
                     <button id="accept-terms-btn" class="pop-up-button-accept" :class="(!termsCheckInput) ? ' button-inactive' : ''" @click="acceptTerms">ACCEPT</button>
-                    <button id="decline-btn" @click="closeSignInProcess()"
+                    <button id="decline-btn" @click="closeSignInProcess()" style="display: none;"
                             class="pop-up-button-decline button-inactive">
                         DECLINE
                     </button>
@@ -65,11 +65,16 @@
                     OpenPKG setup successful
                 </h2>
                 <p class="pop-up-text">
-                    Everything is ready now. You can close this window and go to the <span
-                        class="bold">OpenPKG page</span>.
+                    You can close this window and continue browsing the website.
                 </p>
+                <div class="pop-up-buttons-wrapper">
+                    <button class="pop-up-button-accept" @click="goToAdminPanel">VISIT ADMIN PANEL</button>
+                </div>
             </div>
+
         </div>
+
+        <button class="pop-up-button-accept floating-button" @click="goToAdminPanel" v-if="showAdminPanelButton">OPENPKG PANEL</button>
     </div>
 </template>
 
@@ -81,14 +86,17 @@
         name: "SignInPopup",
         data() {
             return {
-                wallet: null,
+                wallet: 'wallet',
                 showSignInBox: false,
                 showTerms: false,
                 termsCheckInput: false,
                 termsAccepted: false,
                 metamaskSignedIn: false,
                 isConnected: false,
-                accounts: null
+                accounts: null,
+                signedIn: false,
+                showAdminPanelButton: false,
+                showAdminPanelInitial: false
             }
         },
         mounted() {
@@ -105,6 +113,9 @@
 
         },
         methods: {
+            goToAdminPanel() {
+                window.open('/open-pkg-admin.html', '_blank');
+            },
             checkIfMemataskIsSigned() {
 
                 if (window.ethereum && window.ethereum.isMetaMask) {
@@ -115,7 +126,11 @@
 
                         this.wallet = window.ethereum._state.accounts[0];
 
+                        this.signedIn = true;
+
                     } else {
+
+                        this.wallet = null;
 
                     }
 
@@ -218,7 +233,12 @@
                 }
             },
             accounts(val) {
-                console.log(val, 'accounts');
+
+            },
+            wallet() {
+                if (window.location.href.indexOf('admin') === -1 && this.wallet !== null) {
+                    this.showAdminPanelButton = true;
+                }
             }
         }
     }

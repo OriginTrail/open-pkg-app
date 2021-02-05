@@ -51,7 +51,7 @@ module.exports = {
 
 
                             if(pipelineFinalResult.hasOwnProperty('status') && pipelineFinalResult.status === 'COMPLETED') {
-                                console.log(pipelineFinalResult, 'storing data result');
+
                                 return pipelineFinalResult;
                             } else {
                                 return { status : 'FAILED'};
@@ -93,7 +93,6 @@ module.exports = {
     //                 if(PipelineService.isNotFinished(pipelineResult)) {
     //
     //                     let response = { status : 'Publishing has being started successfully.'};
-    //                     console.log(response, 'publish data result');
     //                     return response;
     //
     //                 } else {
@@ -143,7 +142,6 @@ module.exports = {
 
 
                             if(pipelineFinalResult.hasOwnProperty('response')) {
-                                console.log(pipelineFinalResult, 'get data result');
                                 return pipelineFinalResult;
                             } else {
                                 return { status : 'FAILED'};
@@ -202,7 +200,6 @@ module.exports = {
                             let pipelineFinalResult = await PipelineService.waitForPipelineToFinish(EndPoint, pipelineInstanceId, Token);
 
                             if(pipelineFinalResult.hasOwnProperty('status') && pipelineFinalResult.status === 'COMPLETED') {
-                                console.log(pipelineFinalResult, 'delete data result');
                                 return pipelineFinalResult;
                             } else {
                                 return { status : 'FAILED'};
@@ -240,8 +237,6 @@ module.exports = {
                 return window.ethereum._state.accounts[0];
 
             } else {
-                console.log('Account on Metamask not connected');
-
                 return null;
             }
 
@@ -285,7 +280,6 @@ module.exports = {
                     if(err || result.error) {
 
                         //signing finished error
-                        console.log('signing finished error');
                         resolve(null);
 
                     } else {
