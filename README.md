@@ -1,4 +1,6 @@
-# open-pkg-app
+# OpenPKG Frontend application
+
+This repo is related of the OpenPKG project, more info available [here](https://medium.com/origintrail/open-provenance-knowledge-graph-openpkg-a-decentralized-knowledge-graph-for-improved-governance-71162d8de07e?source=collection_home---4------12-----------------------)
 
 ## Installation steps:
 
@@ -67,4 +69,8 @@ If the implementation of “OpenPKG.umd.min.js” script is successful OpenPKG o
 - storePersonalData(**personalData**)
 
 Type of variable personalData can be string, object or array.
+
+
+__________________________________________
+These services are part of a project that has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No 871498.
 
